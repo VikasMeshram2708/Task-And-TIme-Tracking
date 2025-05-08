@@ -1,7 +1,5 @@
 "use client";
-
-import { Loader2, Plus } from "lucide-react";
-import { Button } from "../ui/button";
+import { Task } from "@/types";
 import {
   Dialog,
   DialogClose,
@@ -18,34 +16,45 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import React, { useRef } from "react";
+import { Button } from "../ui/button";
+import { Loader2, Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { Input } from "../ui/input";
-import { taskSchema, TaskSchema } from "@/model";
-import { Textarea } from "../ui/textarea";
-import { createTask } from "@/app/dal/actions";
-import { useRef } from "react";
+import {
+  editTaskSchema,
+  EditTaskSchema,
+  taskSchema,
+  TaskSchema,
+} from "@/model";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { editTask } from "@/app/dal/actions";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 
-export default function AddTask() {
+type EditTaskProps = {
+  task: Task;
+};
+export default function EditTask({ task }: EditTaskProps) {
   const closeModalRef = useRef<HTMLButtonElement | null>(null);
-  const form = useForm<TaskSchema>({
+  const form = useForm<EditTaskSchema>({
     defaultValues: {
-      title: "",
-      status: "INPROGRESS",
-      description: "",
+      title: task.title,
+      status: task.status ?? "INPROGRESS",
+      description: task.description,
+      taskId: task?.id,
     },
-    resolver: zodResolver(taskSchema),
+    resolver: zodResolver(editTaskSchema),
   });
 
-  const onSubmit = async (data: TaskSchema) => {
+  const onSubmit = async (data: EditTaskSchema) => {
     try {
       // console.log("Form submitted with data:", data);
-      const result = await createTask(data);
+      const result = await editTask(data);
       if (!result.success) {
         alert(result.message ?? "Failed");
         return;
       }
-      alert("Task Created");
+      alert("Task Updated");
       //   reset the fields
       form.reset();
       //   close the modal
@@ -63,15 +72,14 @@ export default function AddTask() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="gap-2 shadow-sm hover:shadow-md transition-shadow">
-          <Plus className="h-4 w-4" />
-          Create New Task
+        <Button variant={"ghost"} className="w-full">
+          Edit Task
         </Button>
       </DialogTrigger>
       <DialogContent className="rounded-lg sm:max-w-md">
         <DialogHeader className="space-y-2">
           <DialogTitle className="text-2xl font-semibold text-center">
-            Create New Task
+            Edit your task
           </DialogTitle>
         </DialogHeader>
 
@@ -122,9 +130,7 @@ export default function AddTask() {
 
             <div className="flex justify-end pt-3 gap-3">
               <Button
-                disabled={
-                  !form.formState.isDirty || form.formState.isSubmitting
-                }
+                disabled={form.formState.isSubmitting}
                 type="submit"
                 className="px-6 font-medium transition-all hover:scale-[1.02]"
               >
@@ -134,7 +140,7 @@ export default function AddTask() {
                     Processing...
                   </>
                 ) : (
-                  "Create Task"
+                  "Confirm"
                 )}
               </Button>
               <Button variant={"destructive"} asChild>

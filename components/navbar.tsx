@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Clock, LogOut } from "lucide-react";
+import { CircleUser, Clock, LogOut } from "lucide-react";
 import {
   getKindeServerSession,
   LoginLink,
@@ -26,7 +26,7 @@ export default async function Navbar() {
       <nav className="w-full p-4 border-b shadow">
         <div className="max-w-7xl mx-auto flex justify-between">
           <NavTitle />
-          <Suspense fallback={<Spinner />}>
+          <Suspense fallback={<p>processing...</p>}>
             <div className="flex items-center gap-4">
               <LoginLink>Login</LoginLink>
               <RegisterLink className="border-2 px-4 py-2 rounded-md">
@@ -43,14 +43,16 @@ export default async function Navbar() {
       <div className="max-w-7xl mx-auto flex justify-between">
         <NavTitle />
 
-        <Suspense fallback={<Spinner />}>
+        <Suspense fallback={<p>processing...</p>}>
           <div className="flex items-center gap-8">
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <span className="text-lg capitalize">{user?.given_name}</span>
+                <CircleUser />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuLabel>My Actions</DropdownMenuLabel>
+                <DropdownMenuLabel>
+                  Welcome back, {user?.given_name}
+                </DropdownMenuLabel>
                 <DropdownMenuItem>
                   <Link href="/dashboard">Dashboard</Link>
                 </DropdownMenuItem>
@@ -75,8 +77,4 @@ export default async function Navbar() {
       </div>
     </nav>
   );
-}
-
-function Spinner() {
-  return <Clock className="transition animate-spin duration-500 ease-linear" />;
 }
