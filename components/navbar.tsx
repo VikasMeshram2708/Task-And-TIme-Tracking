@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { CircleUser, Clock, LogOut } from "lucide-react";
+import { CircleUser, LogOut } from "lucide-react";
 import {
   getKindeServerSession,
   LoginLink,

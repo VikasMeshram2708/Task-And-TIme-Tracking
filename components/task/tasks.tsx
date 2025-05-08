@@ -17,6 +17,9 @@ import { EllipsisVertical, Loader2 } from "lucide-react";
 import DeleteTask from "./delete-task";
 import EditTask from "./edit-task";
 import TaskStatus from "./task-status";
+import TimestampBtn from "./timestamp-btn";
+import TaskCountdown from "./task-countdown";
+import ElapsedTime from "./elapsed-time";
 
 type TasksProps = {
   tasks: Task[];
@@ -24,32 +27,38 @@ type TasksProps = {
 
 export default function Tasks({ tasks }: TasksProps) {
   return (
-    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {tasks.map((task) => (
         <Card
           key={task?.id}
-          className="flex flex-col justify-between transition-shadow border-muted hover:shadow-md"
+          className="flex flex-col justify-between border hover:shadow-lg transition-shadow duration-300"
         >
-          <CardHeader className="">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-lg font-semibold truncate w-[80%]">
+          <CardHeader className="pb-3">
+            <div className="flex items-start justify-between">
+              <CardTitle className="text-base font-medium leading-snug line-clamp-2 w-4/5">
                 {task?.title || "Untitled Task"}
               </CardTitle>
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <EllipsisVertical />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem asChild>
-                    <EditTask task={task} />
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <DeleteTask taskId={task?.id} defaultTitle={task?.title} />
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <div className="flex items-center gap-2">
+                <TimestampBtn taskId={task.id} />
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="p-1 rounded-md hover:bg-accent focus:outline-none focus-visible:ring">
+                    <EllipsisVertical className="w-5 h-5" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem asChild>
+                      <EditTask task={task} />
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <DeleteTask
+                        taskId={task?.id}
+                        defaultTitle={task?.title}
+                      />
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             </div>
-            <CardDescription className="text-sm text-muted-foreground line-clamp-3">
+            <CardDescription className="mt-2 text-sm leading-relaxed line-clamp-3">
               {task?.description || "No description provided for this task."}
             </CardDescription>
           </CardHeader>
@@ -58,7 +67,10 @@ export default function Tasks({ tasks }: TasksProps) {
             <div className="space-y-1 text-muted-foreground">
               {task?.createdAt ? (
                 <>
-                  <p>
+                  <span>Elapsed Time : </span>
+                  <TaskCountdown />
+                  <ElapsedTime taskId={task?.id} />
+                  {/* <p>
                     <span className="font-medium">Created:</span>{" "}
                     {new Date(task.createdAt).toLocaleDateString("en-IN")}
                   </p>
@@ -69,20 +81,20 @@ export default function Tasks({ tasks }: TasksProps) {
                       hour: "2-digit",
                       minute: "2-digit",
                     })}
-                  </p>
+                  </p> */}
                 </>
               ) : (
                 <p>Creation date unavailable</p>
               )}
             </div>
 
-            <div className="w-full sm:w-auto">
+            <div className="w-full sm:w-auto flex items-center gap-2">
               <Suspense
                 fallback={
-                  <>
-                    <Loader2 className="animate-spin w-5 h-5" />
-                    "Processing..."
-                  </>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Loader2 className="animate-spin w-4 h-4" />
+                    Processing...
+                  </div>
                 }
               >
                 {task?.status && (
