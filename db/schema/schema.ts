@@ -12,19 +12,6 @@ const timeStamps = {
   updatedAt: timestamp("updated_at", { mode: "string" }).defaultNow(),
 };
 
-export const userTable = pgTable(
-  "users",
-  {
-    id: uuid("id").defaultRandom().primaryKey(),
-    name: text("name").notNull(),
-    email: text("email").notNull().unique(),
-    password: text("password").notNull(),
-    tenantId: uuid("tenant_id").notNull().unique(),
-    ...timeStamps,
-  },
-  (table) => [index("tenantIdx").on(table.tenantId)]
-);
-
 export const taskStatus = pgEnum("task_status", [
   "INPROGRESS",
   "COMPLETED",
@@ -38,7 +25,7 @@ export const taskTable = pgTable(
     title: text("title").notNull(),
     description: text("description").notNull(),
     status: taskStatus().default("PENDING"),
-    userId: uuid("user_id").references(() => userTable.tenantId),
+    tenantId: text("tenant_id").notNull(),
     completedAt: timestamp("completed_at", { mode: "string" }),
     ...timeStamps,
   },
