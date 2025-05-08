@@ -1,4 +1,5 @@
-// import { db } from ".";
+import { db } from ".";
+import { timeLogs } from "./schema/schema";
 // import { taskTable, timeLogs, userTable } from "./schema/schema";
 
 // // Create the formatter
@@ -77,10 +78,24 @@
 //   console.log("Transaction completed successfully");
 // }
 
-// main()
-//   .then(() => console.log("Seed success"))
-//   .catch((e) => {
-//     console.error("Seed failed:");
-//     console.error(e);
-//     process.exit(1);
-//   });
+const start = new Date().toISOString();
+async function main() {
+  console.log("seed started");
+  await db
+    .insert(timeLogs)
+    .values({
+      startTime: start,
+      endTime: new Date().toISOString(),
+      duration: "2 hours",
+      taskId: "855b3550-0e52-46af-bc8f-9af2db2e52c0",
+    })
+    .returning();
+  console.log("seed finised");
+}
+main()
+  .then(() => console.log("Seed success"))
+  .catch((e) => {
+    console.error("Seed failed:");
+    console.error(e);
+    process.exit(1);
+  });

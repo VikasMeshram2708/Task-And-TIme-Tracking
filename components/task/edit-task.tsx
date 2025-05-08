@@ -18,14 +18,9 @@ import {
 } from "../ui/form";
 import React, { useRef } from "react";
 import { Button } from "../ui/button";
-import { Loader2, Plus } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
-import {
-  editTaskSchema,
-  EditTaskSchema,
-  taskSchema,
-  TaskSchema,
-} from "@/model";
+import { editTaskSchema, EditTaskSchema } from "@/model";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { editTask } from "@/app/dal/actions";
 import { Input } from "../ui/input";

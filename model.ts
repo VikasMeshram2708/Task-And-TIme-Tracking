@@ -47,3 +47,13 @@ export const updateTaskSchema = z.object({
   taskId: z.string().min(1, { message: "Task Id is required" }),
 });
 export type UpdateTaskSchema = z.infer<typeof updateTaskSchema>;
+
+// Task Time Schema
+export const createTimeSchema = z.object({
+  taskId: z.string().min(1, { message: "Task Id is required" }),
+  duration: z.string().min(1, { message: "Elapsed time is required" }),
+  startTime: z.string().min(1, { message: "Start time is required" }),
+  endTime: z.string().min(1, { message: "End time is required" }),
+});
+
+export type CreateTimeSchema = z.infer<typeof createTimeSchema>;
