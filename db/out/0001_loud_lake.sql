@@ -1,0 +1,1 @@
+ALTER TABLE "timeLogs" ALTER COLUMN "duration" SET DATA TYPE text;
