@@ -15,7 +15,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen">
-      <h2>Dashboard Page</h2>
+      <h2>Summary</h2>
       <Card>
         <small>Logged in as {user?.given_name}</small>
         <pre>{JSON.stringify(user, null, 2)}</pre>

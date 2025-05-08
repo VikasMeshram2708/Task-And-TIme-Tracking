@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import useDebounce from "@/lib/useDebounce";
 import { SearchIcon } from "lucide-react";
@@ -7,6 +7,13 @@ import { SearchIcon } from "lucide-react";
 export default function TaskSearchBar() {
   const [searchText, setSearchText] = useState("");
   const debounceQuery = useDebounce(searchText);
+
+  useEffect(() => {
+    function searchTask() {
+      // TODO: Search Logic goes here
+    }
+    searchTask();
+  }, [debounceQuery]);
   return (
     <div className="relative max-w-4xl w-full sm:max-w-7xl">
       <Input

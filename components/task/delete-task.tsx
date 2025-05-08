@@ -72,7 +72,9 @@ export default function DeleteTask({ taskId, defaultTitle }: DeleteProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"ghost"}>Delete</Button>
+        <Button variant={"ghost"} className="w-full">
+          Delete
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-md">

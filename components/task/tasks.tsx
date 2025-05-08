@@ -1,5 +1,5 @@
 import { Task } from "@/types";
-import React from "react";
+import React, { Suspense } from "react";
 import {
   Card,
   CardDescription,
@@ -8,20 +8,15 @@ import {
   CardTitle,
 } from "../ui/card";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { EllipsisVertical } from "lucide-react";
+import { EllipsisVertical, Loader2 } from "lucide-react";
 import DeleteTask from "./delete-task";
+import EditTask from "./edit-task";
+import TaskStatus from "./task-status";
 
 type TasksProps = {
   tasks: Task[];
@@ -37,7 +32,7 @@ export default function Tasks({ tasks }: TasksProps) {
         >
           <CardHeader className="">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg font-semibold truncate">
+              <CardTitle className="text-lg font-semibold truncate w-[80%]">
                 {task?.title || "Untitled Task"}
               </CardTitle>
               <DropdownMenu>
@@ -45,7 +40,9 @@ export default function Tasks({ tasks }: TasksProps) {
                   <EllipsisVertical />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem>Edit</DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <EditTask task={task} />
+                  </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <DeleteTask taskId={task?.id} defaultTitle={task?.title} />
                   </DropdownMenuItem>
@@ -80,16 +77,18 @@ export default function Tasks({ tasks }: TasksProps) {
             </div>
 
             <div className="w-full sm:w-auto">
-              <Select defaultValue={task?.status ?? "INPROGRESS"}>
-                <SelectTrigger className="w-full sm:w-[150px]">
-                  <SelectValue placeholder="Select status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="INPROGRESS">In Progress</SelectItem>
-                  <SelectItem value="COMPLETED">Completed</SelectItem>
-                  <SelectItem value="PENDING">Pending</SelectItem>
-                </SelectContent>
-              </Select>
+              <Suspense
+                fallback={
+                  <>
+                    <Loader2 className="animate-spin w-5 h-5" />
+                    "Processing..."
+                  </>
+                }
+              >
+                {task?.status && (
+                  <TaskStatus status={task?.status} taskId={task?.id} />
+                )}
+              </Suspense>
             </div>
           </CardFooter>
         </Card>
