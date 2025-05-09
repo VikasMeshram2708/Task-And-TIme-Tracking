@@ -64,7 +64,7 @@ export default function Tasks({ tasks }: TasksProps) {
           </CardHeader>
 
           <CardFooter className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-t pt-4 text-sm">
-            {/* <div className="space-y-1 text-muted-foreground">
+            <div className="space-y-1 text-muted-foreground">
               {task?.createdAt ? (
                 <>
                   <span>Elapsed Time : </span>
@@ -74,7 +74,7 @@ export default function Tasks({ tasks }: TasksProps) {
               ) : (
                 <p>Creation date unavailable</p>
               )}
-            </div> */}
+            </div>
 
             <div className="w-full sm:w-auto flex items-center gap-2">
               <Suspense

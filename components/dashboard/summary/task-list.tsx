@@ -1,5 +1,5 @@
 "use client";
-import { Task, TrackLog } from "@/types";
+import { Status, Task, TrackLog } from "@/types";
 import {
   Card,
   CardContent,
@@ -45,7 +45,7 @@ function TaskCard({ task, index }: { task: Task; index: number }) {
               <span className="text-muted-foreground font-mono text-sm">
                 #{index}
               </span>
-              <TaskStatusBadge status={task.status} />
+              <TaskStatusBadge status={task.status as Status} />
             </div>
             <CardTitle className="text-lg mt-1">{task.title}</CardTitle>
           </div>
