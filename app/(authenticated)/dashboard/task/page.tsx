@@ -1,5 +1,5 @@
 import AddTask from "@/components/task/add-task";
-import TaskSearchBar from "@/components/task/task-search-bar";
+// import TaskSearchBar from "@/components/task/task-search-bar";
 import Tasks from "@/components/task/tasks";
 import TasksFallback from "@/components/tasks-fallback";
 import { db } from "@/db";
@@ -28,7 +28,7 @@ export default async function TaskPage() {
   return (
     <main className="space-y-6">
       <section className="flex items-center justify-between flex-wrap gap-4">
-        <TaskSearchBar />
+        {/* <TaskSearchBar /> */}
         <AddTask />
       </section>
 

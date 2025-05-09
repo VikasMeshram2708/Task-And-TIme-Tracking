@@ -79,6 +79,7 @@ export const createTask = async (data: unknown) => {
 
 // Delete Task
 export const deleteTask = async (data: unknown) => {
+  // console.log("incd", data);
   //   auth check
   const { isAuthenticated, getUser, getPermission } = getKindeServerSession();
   const authenticated = await isAuthenticated();

@@ -2,7 +2,7 @@
 
 ## Test Credentials
 
-- Email: nojikex578@bocapies.com Password: Test@123
+- Email: magori2785@bocapies.com Password: Test@123
 
 ## Demo Link
 

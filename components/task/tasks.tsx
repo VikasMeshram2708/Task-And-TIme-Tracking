@@ -67,9 +67,9 @@ export default function Tasks({ tasks }: TasksProps) {
             <div className="space-y-1 text-muted-foreground">
               {task?.createdAt ? (
                 <>
-                  <span>Elapsed Time : </span>
+                  {/* <span>Elapsed Time : </span> */}
                   <TaskCountdown />
-                  <ElapsedTime taskId={task?.id} />
+                  {/* <ElapsedTime taskId={task?.id} /> */}
                 </>
               ) : (
                 <p>Creation date unavailable</p>

@@ -35,7 +35,10 @@ export const taskTable = pgTable(
 export const timeLogs = pgTable("timeLogs", {
   id: uuid("id").defaultRandom().primaryKey(),
   taskId: uuid("task_id")
-    .references(() => taskTable.id)
+    .references(() => taskTable.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    })
     .notNull(),
   startTime: timestamp("start_time", { mode: "string" }).notNull(),
   endTime: timestamp("end_time", { mode: "string" }).notNull(),
