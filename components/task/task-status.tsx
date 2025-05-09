@@ -44,8 +44,13 @@ export default function TaskStatus({ status, taskId }: TaskStatusProps) {
           });
 
           if (!result.success) {
-            throw new Error(result.message || "Failed to update status");
+            alert(result.message ?? "Failed");
+            return;
+            // throw new Error(result.message || "Failed to update status");
           }
+          alert("Status Updated");
+          return;
+
           // console.log("Status updated successfully");
         } catch (error) {
           console.error("Status update error:", error);
@@ -61,56 +66,56 @@ export default function TaskStatus({ status, taskId }: TaskStatusProps) {
   }, [debouncedStatus, status, taskId]);
 
   // Handle timer state based on status changes
-  useEffect(() => {
-    // If status is changing to COMPLETED and timer was running
-    if (debouncedStatus === "COMPLETED" && activeTimers[taskId]) {
-      const handleCompletion = async () => {
-        stopTimer(taskId);
-        const { startTime, endTime } = getTimeStamps(taskId);
-        const estimatedDuration =
-          startTime && endTime ? Math.floor((endTime - startTime) / 1000) : 0;
-        try {
-          const result = await createTimeLog({
-            taskId,
-            startTime: startTime ? new Date(startTime).toISOString() : null,
-            endTime: endTime ? new Date(endTime).toISOString() : null,
-            duration: estimatedDuration.toString(),
-          });
+  // useEffect(() => {
+  //   // If status is changing to COMPLETED and timer was running
+  //   if (debouncedStatus === "COMPLETED" && activeTimers[taskId]) {
+  //     const handleCompletion = async () => {
+  //       stopTimer(taskId);
+  //       const { startTime, endTime } = getTimeStamps(taskId);
+  //       const estimatedDuration =
+  //         startTime && endTime ? Math.floor((endTime - startTime) / 1000) : 0;
+  //       try {
+  //         const result = await createTimeLog({
+  //           taskId,
+  //           startTime: startTime ? new Date(startTime).toISOString() : null,
+  //           endTime: endTime ? new Date(endTime).toISOString() : null,
+  //           duration: estimatedDuration.toString(),
+  //         });
 
-          if (!result.success) {
-            console.error("Failed to save time log");
-          } else {
-            console.log("Time log saved for completed task", {
-              taskId,
-              startTime,
-              endTime,
-            });
-          }
-        } catch (error) {
-          console.error("Error saving time log:", error);
-        }
-      };
-      handleCompletion();
-    }
+  //         if (!result.success) {
+  //           console.error("Failed to save time log");
+  //         } else {
+  //           console.log("Time log saved for completed task", {
+  //             taskId,
+  //             startTime,
+  //             endTime,
+  //           });
+  //         }
+  //       } catch (error) {
+  //         console.error("Error saving time log:", error);
+  //       }
+  //     };
+  //     handleCompletion();
+  //   }
 
-    // For all other status changes, maintain timer state
-    if (debouncedStatus !== status) {
-      if (debouncedStatus === "INPROGRESS") {
-        startTimer(taskId);
-      } else if (status === "INPROGRESS" && debouncedStatus !== "COMPLETED") {
-        // Only stop timer if changing from INPROGRESS to non-COMPLETED status
-        stopTimer(taskId);
-      }
-    }
-  }, [
-    debouncedStatus,
-    status,
-    taskId,
-    activeTimers,
-    getTimeStamps,
-    startTimer,
-    stopTimer,
-  ]);
+  //   // For all other status changes, maintain timer state
+  //   if (debouncedStatus !== status) {
+  //     if (debouncedStatus === "INPROGRESS") {
+  //       startTimer(taskId);
+  //     } else if (status === "INPROGRESS" && debouncedStatus !== "COMPLETED") {
+  //       // Only stop timer if changing from INPROGRESS to non-COMPLETED status
+  //       stopTimer(taskId);
+  //     }
+  //   }
+  // }, [
+  //   debouncedStatus,
+  //   status,
+  //   taskId,
+  //   activeTimers,
+  //   getTimeStamps,
+  //   startTimer,
+  //   stopTimer,
+  // ]);
 
   return (
     <div>

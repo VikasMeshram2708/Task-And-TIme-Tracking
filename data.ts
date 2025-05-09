@@ -1,10 +1,4 @@
-import {
-  ShieldCheck,
-  Home,
-  TimerIcon,
-  Settings,
-  LucideIcon,
-} from "lucide-react";
+import { Home, TimerIcon, LucideIcon } from "lucide-react";
 
 interface NavItem {
   title: string;
@@ -25,20 +19,6 @@ export const navItems: NavItem[] = [
     title: "Task",
     url: "/dashboard/task",
     icon: TimerIcon,
-    isAdmin: false,
-    requiresAuth: true,
-  },
-  {
-    title: "Admin",
-    url: "/dashboard/admin",
-    icon: ShieldCheck,
-    isAdmin: true,
-    requiresAuth: true,
-  },
-  {
-    title: "Settings",
-    url: "/dashboard/settings",
-    icon: Settings,
     isAdmin: false,
     requiresAuth: true,
   },

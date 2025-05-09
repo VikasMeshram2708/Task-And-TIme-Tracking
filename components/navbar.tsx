@@ -24,7 +24,7 @@ export default async function Navbar() {
   if (!(await isAuthenticated())) {
     return (
       <nav className="w-full p-4 border-b shadow">
-        <div className="max-w-7xl mx-auto flex justify-between">
+        <div className="container mx-auto flex justify-between">
           <NavTitle />
           <Suspense fallback={<p>processing...</p>}>
             <div className="flex items-center gap-4">
@@ -40,7 +40,7 @@ export default async function Navbar() {
   }
   return (
     <nav className="w-full p-4 border-b shadow">
-      <div className="max-w-7xl mx-auto flex justify-between">
+      <div className="container mx-auto flex justify-between">
         <NavTitle />
 
         <Suspense fallback={<p>processing...</p>}>

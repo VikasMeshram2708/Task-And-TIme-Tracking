@@ -13,27 +13,18 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 import { navItems as items } from "@/data";
 
 export function TaskSidebar() {
-  const { getPermission } = useKindeBrowserClient();
-  const isAdmin = getPermission("delete:user")?.isGranted; // Check for admin-level permission
-
   return (
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>Task Tracking</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {
-                // Show Admin link only for admin users
-                if (item.isAdmin && !isAdmin) {
-                  return null; // Hide the Admin menu item for non-admin users
-                }
-
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
