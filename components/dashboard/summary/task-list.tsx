@@ -6,11 +6,10 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  CardFooter,
 } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Loader2, CheckCircle, AlertCircle, Timer } from "lucide-react";
+import { Clock, CheckCircle, AlertCircle, Timer } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 type TaskListProps = {

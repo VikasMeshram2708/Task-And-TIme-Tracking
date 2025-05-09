@@ -11,8 +11,6 @@ import useDebounce from "@/lib/useDebounce";
 import { updateStatus } from "@/app/dal/actions";
 import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 import { Loader2 } from "lucide-react";
-import { useTimerStore } from "@/app/context/store";
-import { createTimeLog } from "@/app/dal/timerAction";
 
 type StatusType = "INPROGRESS" | "PENDING" | "COMPLETED";
 
@@ -25,9 +23,6 @@ export default function TaskStatus({ status, taskId }: TaskStatusProps) {
   const [statusValue, setStatusValue] = useState<StatusType>(status);
   const debouncedStatus = useDebounce(statusValue, 500);
   const [loading, setLoading] = useState(false);
-
-  const { startTimer, stopTimer, getTimeStamps, activeTimers } =
-    useTimerStore();
 
   function handleChange(value: StatusType) {
     setStatusValue(value);

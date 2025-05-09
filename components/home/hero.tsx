@@ -1,5 +1,4 @@
 import { ArrowRight, CheckCircle, Clock, BarChart2 } from "lucide-react";
-import CtaBtn from "./cta-btn";
 
 export function Hero() {
   return (
@@ -69,7 +68,7 @@ export function Hero() {
                   {/* Today's Tasks Preview */}
                   <div className="col-span-2 space-y-4">
                     <div className="flex justify-between items-center">
-                      <h3 className="font-medium">Today's Tasks</h3>
+                      <h3 className="font-medium">{"Today's"} Tasks</h3>
                       <span className="text-xs text-muted-foreground">
                         May 9, 2025
                       </span>

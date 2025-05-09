@@ -23,9 +23,6 @@ export default function TimestampBtn({ taskId, className }: TimestampBtnProps) {
   const handleClick = async (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    // Get current timestamps before toggling
-    const currentTimestamps = getTimeStamps(taskId);
-
     // Toggle the timer (this will update start/end times in the store)
     toggleTimer(taskId);
 
@@ -61,25 +58,25 @@ export default function TimestampBtn({ taskId, className }: TimestampBtnProps) {
     } else {
       // We just started the timer
       const newTimestamps = getTimeStamps(taskId);
-      // console.log("Timer Started", {
-      //   taskId,
-      //   startTime: new Date(newTimestamps.startTime || 0).toLocaleString(),
-      // });
+      console.log("Timer Started", {
+        taskId,
+        startTime: new Date(newTimestamps.startTime || 0).toLocaleString(),
+      });
     }
   };
 
-  const formatDuration = (ms: number) => {
-    const totalSeconds = Math.floor(ms / 1000);
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
+  // const formatDuration = (ms: number) => {
+  //   const totalSeconds = Math.floor(ms / 1000);
+  //   const hours = Math.floor(totalSeconds / 3600);
+  //   const minutes = Math.floor((totalSeconds % 3600) / 60);
+  //   const seconds = totalSeconds % 60;
 
-    return [
-      hours.toString().padStart(2, "0"),
-      minutes.toString().padStart(2, "0"),
-      seconds.toString().padStart(2, "0"),
-    ].join(":");
-  };
+  //   return [
+  //     hours.toString().padStart(2, "0"),
+  //     minutes.toString().padStart(2, "0"),
+  //     seconds.toString().padStart(2, "0"),
+  //   ].join(":");
+  // };
 
   if (!isMounted) {
     return (
