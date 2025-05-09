@@ -4,6 +4,21 @@
 
 - Email: magori2785@bocapies.com Password: Test@123
 
+### Steps to getting started
+
+1. Register
+2. Login
+3. After login you'll be redirected to dashboard
+4. Click of the Task Menu inside the sidebar then you'll be redireted to tasks page
+5. Click on Create New Task button then fill in the details.
+6. You can Edit, and Delete also.
+
+### Steps to create time logs
+
+1. After you have created task there's a start button beside the title,
+2. You can Start and Stop the timer from that button.
+3. Also there's a popup timer at the bottom right side that wil not update you task time tracking it'll just stop the timer it wont create new time log.
+
 ## Demo Link
 
 - Demo Link [https://task-tracking-ruddy.vercel.app]
