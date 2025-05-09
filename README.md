@@ -23,25 +23,25 @@
 
 - [x] Authentication & Authorization (login, register,logout)
 
-- [ ] Task CRUD Operations (title, description) update status (pending, in progress, completed).
+- [x] Task CRUD Operations (title, description) update status (pending, in progress, completed).
 
-- [ ] Real-Time Tracking (start-stop time tracking)
+- [x] Real-Time Tracking (start-stop time tracking)
 
-  - [ ] Start tracking with start button.
-  - [ ] End tracking with stop button.
-  - [ ] Store each session as a time log entry.
-  - [ ] Show elapse time while tracking is active.
+  - [x] Start tracking with start button.
+  - [x] End tracking with stop button.
+  - [x] Store each session as a time log entry.
+  - [x] Show elapse time while tracking is active.
 
-- [ ] User must be able to view all time logs
-- [ ] View total time spent on each task.
+- [x] User must be able to view all time logs
+- [x] View total time spent on each task.
 
-- [ ] Daily Summary
+- [x] Daily Summary
 
-  - [ ] Creat a view that display a summary for the current day, including tasks worked on, total time tracked,completed tasks, task still in progress or pending
+  - [x] Create a view that display a summary for the current day, including tasks worked on, total time tracked,completed tasks, task still in progress or pending
 
-- [ ] API & backend
+- [x] API & backend
 
-  - [ ] CRUD Operations for tasks and time logs.
-  - [ ] Proper authorization on every endpoint. Input validation, error handling, and meaningful HTTP responses organized route and controller logic.
+  - [x] CRUD Operations for tasks and time logs.
+  - [x] Proper authorization on every endpoint. Input validation, error handling, and meaningful HTTP responses organized route and controller logic.
 
-- [ ] Test credentials for easier review deliverables.
+- [x] Test credentials for easier review deliverables.

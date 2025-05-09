@@ -64,29 +64,17 @@ export default function Tasks({ tasks }: TasksProps) {
           </CardHeader>
 
           <CardFooter className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-t pt-4 text-sm">
-            <div className="space-y-1 text-muted-foreground">
+            {/* <div className="space-y-1 text-muted-foreground">
               {task?.createdAt ? (
                 <>
                   <span>Elapsed Time : </span>
                   <TaskCountdown />
                   <ElapsedTime taskId={task?.id} />
-                  {/* <p>
-                    <span className="font-medium">Created:</span>{" "}
-                    {new Date(task.createdAt).toLocaleDateString("en-IN")}
-                  </p>
-                  <p>
-                    <span className="font-medium">Time:</span>{" "}
-                    {new Date(task.createdAt).toLocaleTimeString("en-IN", {
-                      hour12: true,
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </p> */}
                 </>
               ) : (
                 <p>Creation date unavailable</p>
               )}
-            </div>
+            </div> */}
 
             <div className="w-full sm:w-auto flex items-center gap-2">
               <Suspense

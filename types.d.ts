@@ -8,3 +8,15 @@ export interface Task {
   createdAt: string | null;
   updatedAt: string | null;
 }
+
+export type Status = "INPROGRESS" | "PENDING" | "COMPLETED";
+
+export interface TrackLog {
+  id: string;
+  taskId: string;
+  startTime: Date;
+  endTime: Date;
+  duration: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
